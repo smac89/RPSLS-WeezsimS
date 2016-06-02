@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name" translatable="false">RPS - WeezsimS</string>
+    <string name="prompt">Select choice for %s:</string>
+    <string name="btnaction">RPSLS!</string>
+    <string-array name="rps_choices">
+        <item>Rock</item>
+        <item>Paper</item>
+        <item>Scissors</item>
+        <item>Lizard</item>
+        <item>Spock</item>
+    </string-array>
+</resources>
