@@ -7,6 +7,7 @@ android:
     - build-tools-23.0.2
     - android-23
     - sys-img-armeabi-v7a-android-23
+    - extra-android-m2repository
 
 before_cache:
   - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
