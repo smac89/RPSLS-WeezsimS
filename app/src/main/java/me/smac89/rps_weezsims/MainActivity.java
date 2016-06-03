@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     static {
         try {
-            System.loadLibrary("c++_shared");
-            Log.d(TAG, "Loaded the shared library");
+            System.loadLibrary("stlport_shared");
+            Log.d(TAG, "Loaded the stl shared lib");
             System.loadLibrary("rpsls");
             Log.d(TAG, "The native rpsls library was loaded successfully");
         } catch (UnsatisfiedLinkError ule) {
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new LovelyStandardDialog(this)
                 .setTopColor(ContextCompat.getColor(this, R.color.dark_green))
                 .setIcon(R.drawable.ic_group_work_white_24dp)
-                .setTitle("Match Result")
+                .setTitle(R.string.result)
                 .setMessage(msg)
                 .setMessageGravity(Gravity.CENTER_VERTICAL)
                 .show();

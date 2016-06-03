@@ -2,6 +2,7 @@
     <string name="app_name" translatable="false">RPSLS - WeezsimS</string>
     <string name="prompt">Select choice for %s:</string>
     <string name="btnaction">RPSLS!</string>
+    <string name="result">Match Result</string>
     <string-array name="rps_choices">
         <item>Rock</item>
         <item>Paper</item>

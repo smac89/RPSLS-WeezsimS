@@ -8,6 +8,7 @@
 *.o
 *.so
 *.o.d
+*.a
 
 # Files for the Dalvik VM
 *.dex
