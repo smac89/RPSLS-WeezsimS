@@ -1,8 +1,10 @@
 package me.smac89.rps_weezsims;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -73,8 +75,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void showDialogWithMessage(String msg) {
         new LovelyStandardDialog(this)
+                .setTopColor(ContextCompat.getColor(this, R.color.dark_green))
+                .setIcon(R.drawable.ic_group_work_white_24dp)
                 .setTitle("Match Result")
                 .setMessage(msg)
+                .setMessageGravity(Gravity.CENTER_VERTICAL)
                 .show();
     }
 }
