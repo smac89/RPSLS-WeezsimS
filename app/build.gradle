@@ -41,12 +41,6 @@ model {
             create("arm7") {
                 ndk.abiFilters.add("armeabi-v7a")
             }
-            create("x86") {
-                ndk.abiFilters.add("x86")
-            }
-            create("mips") {
-                ndk.abiFilters.add("mips")
-            }
         }
     }
 }
