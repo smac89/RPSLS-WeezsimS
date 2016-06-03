@@ -7,6 +7,7 @@
 # built native files (uncomment if you build your own)
 *.o
 *.so
+*.o.d
 
 # Files for the Dalvik VM
 *.dex
