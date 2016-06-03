@@ -1,6 +1,10 @@
 package me.smac89.rps_weezsims;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button action;
 
     public static final String TAG = MainActivity.class.getSimpleName();
+    public static final String PREFS_NAME = BuildConfig.APPLICATION_ID;
 
     static {
         try {
@@ -56,6 +61,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 R.array.rps_choices, android.R.layout.simple_spinner_dropdown_item);
         player1Choice.setAdapter(adapter);
         player2Choice.setAdapter(adapter);
+
+        // Restore some preferences
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+
+        player1Choice.setSelection(settings.getInt("P1Choice", 0));
+        player2Choice.setSelection(settings.getInt("P2Choice", 0));
+
+    }
+
+    /**
+     * Used to save persistent data across multiple uses of the app
+     * Just saves the choices the players have made
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putInt("P1Choice", player1Choice.getSelectedItemPosition());
+        editor.putInt("P2Choice", player2Choice.getSelectedItemPosition());
+
+        editor.apply();
+    }
+
+    /**
+     * Used to save temporary data incase the app is in the background for too long
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putInt("P1Choice", player1Choice.getSelectedItemPosition());
+        outState.putInt("P2Choice", player2Choice.getSelectedItemPosition());
+    }
+
+    /**
+     * Restores the temporary states
+     */
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        player1Choice.setSelection(savedInstanceState.getInt("P1Choice"));
+        player2Choice.setSelection(savedInstanceState.getInt("P2Choice"));
     }
 
     @Override
@@ -73,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Shows a custom dialog box with the message
+     * @param msg The message to display
+     */
     private void showDialogWithMessage(String msg) {
         new LovelyStandardDialog(this)
                 .setTopColor(ContextCompat.getColor(this, R.color.dark_green))
