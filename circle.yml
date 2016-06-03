@@ -1,3 +1,7 @@
+machine:
+  environment:
+    ANDROID_NDK_HOME: ${ANDROID_NDK}
+    
 test:
   pre:
     # start the emulator
