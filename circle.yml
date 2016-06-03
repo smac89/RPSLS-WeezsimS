@@ -1,3 +1,7 @@
+machine:
+  environment:
+    ANDROID_NDK_HOME: $ANDROID_NDK
+    
 test:
   override:
     # start the emulator
@@ -8,3 +12,5 @@ test:
     - circle-android wait-for-boot
     # run tests  against the emulator.
     - ./gradlew -PdisablePreDex connectedAndroidTest --console=plain
+
+
