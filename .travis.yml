@@ -1,9 +1,9 @@
 language: android
+sudo: true
 android:
   components:
     - platform-tools
     - tools
-
     - build-tools-23.0.3
     - android-23
     - sys-img-armeabi-v7a-android-23
@@ -14,5 +14,9 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+before_install:
+  - git clone https://github.com/urho3d/android-ndk.git $HOME/android-ndk-root
+  - export ANDROID_NDK_HOME=$HOME/android-ndk-root
 
 script: ./gradlew build connectedCheck
