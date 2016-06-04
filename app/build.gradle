@@ -1,47 +1,50 @@
 apply plugin: 'com.android.model.application'
 
 model {
+
     android {
         compileSdkVersion = 23
         buildToolsVersion = "23.0.2"
 
-        defaultConfig {
+        defaultConfig.with {
             applicationId = "me.smac89.rps_weezsims"
             minSdkVersion.apiLevel = 15
             targetSdkVersion.apiLevel = 23
             compileSdkVersion = 23
-            buildToolsVersion = '23.0.2'
             versionCode = 1
             versionName = "1.0"
             testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
         }
+    }
 
-        buildTypes {
-            release {
-                minifyEnabled = false
-                proguardFiles.add(file('proguard-android.txt'))
-            }
-
-            debug {
-                ndk {
-                    abiFilters.addAll(["armeabi", "armeabi-v7a"])
-                }
+    android.buildTypes {
+        release {
+            minifyEnabled = false
+            zipAlignEnabled = true
+        }
+        debug {
+            zipAlignEnabled = true
+            ndk {
+                abiFilters.addAll(["armeabi", "armeabi-v7a", "x86"])
             }
         }
+    }
 
-        ndk {
-            moduleName = "rpsls"
-            stl = "stlport_shared"
-            cppFlags.addAll(['-frtti',  '-fexceptions'])
+    android.ndk {
+        moduleName = "rpsls"
+        stl = "stlport_shared"
+        cppFlags.addAll(['-frtti',  '-fexceptions'])
+        abiFilters.addAll(["armeabi", "armeabi-v7a", "x86"])
+        toolchainVersion = "4.9"
+    }
+
+    android.productFlavors {
+        create("arm") {
+            ndk.abiFilters.addAll(["armeabi", "armeabi-v7a"])
         }
 
-        productFlavors {
-            create("arm") {
-                ndk.abiFilters.add("armeabi")
-            }
-            create("arm7") {
-                ndk.abiFilters.add("armeabi-v7a")
-            }
+        create("x86") {
+            ndk.abiFilters.add("x86")
         }
     }
 }
